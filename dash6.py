@@ -6,7 +6,7 @@ import streamlit as st
 import time
 
 # DATASETS
-df = pd.read_excel('Pesquisa_docente_sem_dados.xlsx')
+df = pd.read_csv('Pesquisa_docente_sem_dados.csv')
 
 
 # Extraindo o ano para facilitar a filtragem depois

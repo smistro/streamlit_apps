@@ -1,7 +1,6 @@
 
 import pandas as pd
-import matplotlib as plt
-import seaborn as sns
+import plotly.express as px
 import streamlit as st
 
 
@@ -81,129 +80,73 @@ data = {
     'Ampliar a minha capacitação para conceber e desenvolver projetos de extensão e serviços para segmentos da sociedade': ['Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente','1','Concordo Totalmente','Concordo Totalmente','Concordo Totalmente']
 }
 
-df = pd.DataFrame(data)
-
-print(df['Data'].unique())
-
-df.head()
-
-df['Date'] = pd.to_datetime(df['Data'])
-# Extraindo o ano para facilitar a filtragem depois
-df['Ano'] = df['Date'].dt.year
-
-
-
 
 # Definir as colunas de infraestrutura
-colunas = ['nivel',
-    'faixa_etaria',
-    'idade_mestrado',
-    'sexo',
-    'orientacao_sexual',
-    'genero',
-    'origem',
-    'cor',
-    'Estado Civil',
-    'Curso de Graduação',
-    'Tipo de instituição em que realizou a graduação',
-    'Ano de conclusão da graduação',
-    'É bolsista no PPGSC?',
-    'Qual a agência que financia?',
-    'O processo seletivo',
-    'O ingresso no Programa',
-    'O processo de recepção/direcionamento de novos alunos',
-    'Adequação dos componentes curriculares do curso (quantidade, duração) aos objetivos da formação pretendida.',
-    'Relação do conteúdo e atividades nas aulas com os objetivos da formação pretendida.',
-    'As atividades acadêmicas desenvolvem as habilidades necessárias para o exercício profissional.',
-    'Equilíbrio entre componentes obrigatórios, optativos e o desenvolvimento da dissertação/tese.',
-    'Nível de desenvolvimento de aprendizagens e competências para o ensino.',
-    'Nível de desenvolvimento de aprendizagens e competências para a pesquisa.',
-    'Nível de desenvolvimento de aprendizagens e competências para a atividade profissional.',
-    'Participação em eventos científicos nacionais ou internacionais.',
-    'Produção de artigos científicos e/ou capítulos de livros para publicação.',
-    'Participação nas atividades do grupo de pesquisa.',
-    'Participação em projetos de extensão.',
-    'Intercâmbios com outros programas nacionais',
-    'Intercâmbios com outros programas internacionais',
-    'Instalações física/tecnológica',
-    'As salas de aula, salas de grupos de pesquisa',
-    'O acesso à biblioteca ou às bases de dados necessárias',
-    'As condições dos laboratórios de pesquisa (espaços, equipamentos, materiais necessários)',
-    'A secretaria (pessoal e instalações) ',
-    'Acesso às plataformas remotas',
-    'Desempenho da Coordenação',
-    'Desempenho de setores de apoio (Secretaria, laboratórios)',
-    'A competência técnica (habilidade em desenvolver as aulas e demonstrar o domínio dos conteúdos da disciplina no ensino presencial). ',
-    'A competência relacional (capacidade em se relacionar com os alunos e propiciar um clima adequado para a aprendizagem no ensino presencial).',
-    'A competência didática (capacidade de transmitir conteúdos; organizar as atividades de aprendizagem, avaliar o processo de ensino-aprendizagem no ensino presencial).',
-    'O compromisso (atenção aos alunos e disposição para cumprir o planejamento apresentado no início do semestre presencial).',
-    'Concluir esta pós-graduação é uma parte fundamental dos meus planos de carreira.',
-    'Neste programa de pós-graduação, tenho feito amizades que contribuem para o meu crescimento pessoal.',
-    'O relacionamento com os professores tem contribuído para o meu crescimento pessoal.',
-    'Sinto-me à vontade para iniciar conversação com os professores e coordenadores do meu programa.',
-    'As disciplinas e as atividades que estamos realizando têm sido estimulantes intelectualmente.',
-    'Eu estou altamente comprometido em obter o meu diploma nesta pós-graduação.',
-    'Nesta universidade, tenho feito amizades que contribuem para o meu crescimento intelectual.',
-    'Estou satisfeito com a qualidade dos professores da minha pós-graduação.',
-    'Tenho pensado seriamente em desistir minha pós-graduação.',
-    'Eu gosto das conversas que eu tenho com os meus colegas da pós-graduação.',
-    'O relacionamento com os professores tem contribuído para o meu crescimento intelectual.',
-    'Percebo que o que estou aprendendo na pós-graduação é fundamental para o trabalho na carreira que escolhi',
-    'Completar esta pós-graduação é uma meta de vida para mim.',
-    'Eu gosto de ter atividades sociais com os meus colegas de universidade.',
-    'O contato com professores ou coordenações acadêmicas têm auxiliado nas minhas reflexões sobre a carreira profissional.',
-    'Sinto que através das disciplinas estou desenvolvendo as habilidades necessárias para o exercício profissional',
-    'As pressões que vivo para realizar a pós-graduação afetam o meu bem estar físico.',
-    'As pressões que vivo para realizar a pós-graduação afetam o meu bem estar psicológico.',
-    'Não tenho tido tempo para estudar e cumprir as demandas da pós-graduação',
-    'A quantidade de tarefas acadêmicas (leituras, exercícios, trabalhos) é excessiva para mim.',
-    'Minha carga de trabalho aumentou (em casa e/ou fora de casa)',
-    'Contribuir para a melhoria da minha renda',
-    'Contribuir para a minha empregabilidade',
-    'Contribuir para o meu crescimento profissional',
-    'Me capacitar para exercer a docência no ensino superior na minha área',
-    'Me capacitar para conceber e desenvolver projetos de pesquisas no meu campo de conhecimento',
-    'Ampliar a minha capacitação para atuar profissionalmente na minha área',
-    'Ampliar a minha capacitação para conceber e desenvolver projetos de extensão e serviços para segmentos da sociedade'
-    ]  # Adicione todas as colunas de infraestrutura aqui
-
+infra_colunas = ['Atualmente você: ',
+'Atualmente, quantos empregos/trabalhos remunerados você tem (se você estiver cursando o doutorado como bolsista, marque nenhum)',
+'HOJE EM DIA, você:  ',
+'Se você estuda, qual nível?',
+'Caso afirmativo na questão anterior, qual área de mestrado ou qual graduação?',
+'Se você trabalha HOJE EM DIA, qual é natureza do seu trabalho:',
+'Onde exerce sua atividade profissional atual?',
+'Regime de contratação ATUAL',
+'Você prestou algum concurso público para o cargo efetivo de docente após a sua pós-graduação?',
+'Caso tenha mudado de atividade profissional, você atribuiria essa nova atividade à realização do mestrado em Saúde Coletiva?',
+'Quanto à sua atividade profissional ATUAL, está relacionada ao mestrado que concluiu?',
+'A conclusão do mestrado ocasionou algum aumento salarial?',
+'No seu trabalho atual, você desenvolve algum projeto de pesquisa?',
+'Se você atua como docente, qual o tipo de inserção?',
+'Qual o tipo de disciplina você ministra atualmente?',
+'Se atua como docente, desenvolve algum projeto de pesquisa?',
+'Você está inserido/participa de algum grupo de pesquisa?',
+'Atualmente você participa de algum comitê, comissão ou assessoria em políticas públicas de saúde ou na área de ciência de tecnologia?',
+'Caso você participe, especificar qual.',
+'Infraestrutura dedicada à gestão do mestrado – secretaria, coordenação, etc. ',
+'Estrutura curricular em termos do quanto permitiu aprendizagens significativas no mestrado',
+'Infraestrutura para ensino usada no mestrado - salas de aula, biblioteca, serviços de videoconferência, laboratórios, etc. ',
+'Suporte oferecido pelo(s) orientador(es) para o desenvolvimento do seu trabalho final',
+'Perfil (formação e experiência) do corpo docente para a manutenção e a qualidade das atividades do mestrado',
+'Dedicação do corpo docente para a manutenção e a qualidade das atividades do mestrado',
+'Contribuiu para a melhora da sua renda ',
+'Contribuiu para a sua empregabilidade',
+'Contribuiu para o seu crescimento profissional',
+'Contribuiu para definição de um campo de interesse temático para pesquisa e atuação profissional',
+'Me capacitou para exercer a docência no ensino superior na minha área',
+'Me capacitou para conceber e desenvolver projetos de pesquisas no meu campo de conhecimento',
+'Ampliou a minha capacitação para atuar profissionalmente na minha área',
+'Ampliou a minha capacitação para conceber e desenvolver projetos de extensão e serviços para segmentos da sociedade',
+'Publicou algum item AO LONGO DO MESTRADO?'
+]
 
 # Título do aplicativo
-st.title("Autoavaliação PPGSC - Pesquisa docente")
+st.title("Autoavaliação - Egressos")
 
 # Seleção de múltiplos anos
-periodo = st.multiselect("Selecione os Anos:", df['Ano'].unique(), default=df['Ano'].unique()[:2])
+anos_selecionados = st.multiselect("Selecione os Anos:", df['Ano'].unique(), default=df['Ano'].unique()[:2])
 
 # Seleção da coluna de infraestrutura
-variavel = st.selectbox("Selecione a Coluna", colunas, key="selectbox_infra")
+infra_selecionada = st.selectbox("Selecione a Coluna", infra_colunas, key="selectbox_infra")
 
 # Filtrar os dados para os anos selecionados e a coluna de infraestrutura
-df_filtrado = df[df['Ano'].isin(periodo)]
+df_filtrado = df[df['Ano'].isin(anos_selecionados)]
 
 # Transformar o DataFrame em formato longo
-df_melted = pd.melt(df_filtrado, id_vars=['Ano'], value_vars=[variavel], 
+df_melted = pd.melt(df_filtrado, id_vars=['Ano'], value_vars=[infra_selecionada], 
                     var_name='Infraestrutura', value_name='Categoria')
 
 # Contar as ocorrências de cada categoria
 contagem_df = df_melted.groupby(['Ano', 'Infraestrutura', 'Categoria']).size().reset_index(name='Contagem')
 
-# Configurar o gráfico
-plt.figure(figsize=(12, 8))
-
-# Criar o gráfico de barras com hue
-sns.set(style="whitegrid")
-g = sns.barplot(
-    data=contagem_df, x="Categoria", y="Contagem", hue="Ano", palette="Set1", ci=None
+# Criar o gráfico de barras com Plotly Express
+fig = px.bar(
+    contagem_df,
+    x="Categoria",
+    y="Contagem",
+    color="Ano",
+    barmode='group',
+    title=f"Avaliação dos docentes para {infra_selecionada}",
+    labels={"Categoria": "Avaliação", "Contagem": "Frequência"},
 )
 
-# Ajustar o título e os rótulos
-g.set_title(f"Avaliação dos docentes para {variavel}", fontsize = 16)
-g.set_xlabel("Avaliação")
-g.set_ylabel("Frequência")
-
-# Mostrar o gráfico no streamlit
-st.pyplot(plt)
-
-plt.close()  # Fecha a figura para evitar duplicações
-
-# streamlit run deploy.py
+# Mostrar o gráfico no Streamlit
+st.plotly_chart(fig)

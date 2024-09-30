@@ -117,6 +117,8 @@ infra_colunas = ['Atualmente você: ',
 'Ampliou a minha capacitação para conceber e desenvolver projetos de extensão e serviços para segmentos da sociedade',
 'Publicou algum item AO LONGO DO MESTRADO?'
 ]
+# Extraindo o ano para facilitar a filtragem depois
+df['Ano'] = df['Data'].dt.year
 
 # Título do aplicativo
 st.title("Autoavaliação - Egressos")

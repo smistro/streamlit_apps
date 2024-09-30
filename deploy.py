@@ -118,7 +118,7 @@ infra_colunas = ['Atualmente você: ',
 'Publicou algum item AO LONGO DO MESTRADO?'
 ]
 
-df = pd.dataframe(data)
+df = pd.DataFrame(data)
 
 # Extraindo o ano para facilitar a filtragem depois
 df['Ano'] = df['Data'].dt.year

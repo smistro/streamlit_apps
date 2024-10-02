@@ -8,7 +8,7 @@ import time
 # DATASETS
 df = pd.read_csv('Pesquisa_docente_sem_dados.csv', sep = ';')
 
-df['Data'] = pd.to_datetime(df['data'])
+df['Data'] = pd.to_datetime(df['Data'])
 
 # # Extraindo o ano para facilitar a filtragem depois
 # df['Ano'] = df['Data'].dt.year

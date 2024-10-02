@@ -1,4 +1,4 @@
-# BIBLIOTECAS
+ = # BIBLIOTECAS
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -6,7 +6,7 @@ import streamlit as st
 import time
 
 # DATASETS
-df = pd.read_csv('Pesquisa_docente_sem_dados.csv')
+df = pd.read_csv('Pesquisa_docente_sem_dados.csv', sep = ';')
 
 df['Data'] = pd.to_datetime(df['data'])
 

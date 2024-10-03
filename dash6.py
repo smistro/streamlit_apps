@@ -329,7 +329,7 @@ def gerar_grafico(selecao, titulo_grupo):
     plt.close()  # Fecha a figura para evitar duplicações
 
 # Criar uma estrutura de layout com 3 colunas (uma para cada grupo de infraestrutura)
-col1, col2, col3 = st.columns([1,1,1])
+col1, col2, col3 = st.columns([0.7,0.7,1])
 
 
 # Exibir gráficos de cada grupo, permitindo a escolha da coluna de interesse
@@ -348,38 +348,4 @@ with col3:
     selecao_discentes = st.selectbox("Selecione a variável de Avaliação dos Discentes:", grupos['AVALIAÇÃO DOS DISCENTES'])
     gerar_grafico(selecao_discentes, "AVALIAÇÃO DOS DISCENTES")
 
-st.write("")
 
-col4, col5, col6 = st.columns([1,1,1])
-
-# Exibir gráficos da segunda linha
-with col4:
-    if len(grupos['INFRAESTRUTURA']) > 1:
-        selecao_infra = st.selectbox("Selecione a próxima variável de Infraestrutura:", grupos['INFRAESTRUTURA'][1:], key="infra2")
-        gerar_grafico(selecao_infra, "INFRAESTRUTURA")
-
-with col5:
-    if len(grupos['GESTÃO']) > 1:
-        selecao_gestao = st.selectbox("Selecione a próxima variável de Gestão:", grupos['GESTÃO'][1:], key="gestao2")
-        gerar_grafico(selecao_gestao, "GESTÃO")
-
-with col6:
-    if len(grupos['AVALIAÇÃO DOS DISCENTES']) > 1:
-        selecao_discentes = st.selectbox("Selecione a próxima variável de Avaliação dos Discentes:", grupos['AVALIAÇÃO DOS DISCENTES'][1:], key="discentes2")
-        gerar_grafico(selecao_discentes, "AVALIAÇÃO DOS DISCENTES")
-# with col4:
-#     st.header("Dissertação")
-#     selecao_discentes = st.selectbox("Selecione a variável de Dissertação:", grupos['DISSERTAÇÃO'])
-#     gerar_grafico(selecao_discentes, "DISSERTAÇÃO")
-
-# with col5:
-#     st.header("Pesquisa")
-#     selecao_discentes = st.selectbox("Selecione a variável de Pesquisa:", grupos['PESQUISA'])
-#     gerar_grafico(selecao_discentes, "PESQUISA")
-
-# with col6:
-#     st.header("Internacionalização")
-#     selecao_discentes = st.selectbox("Selecione a variável de Internacionalização:", grupos['INTERNACIONALIZAÇÃO'])
-#     gerar_grafico(selecao_discentes, "INTERNACIONALIZAÇÃO")
-
-    # streamlit run dash6.py

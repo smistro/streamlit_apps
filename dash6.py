@@ -285,7 +285,7 @@ categorias = ['Muito Alto', 'Alto', 'Médio', 'Baixo', 'Muito Baixo', 'Não Sabe
 st.title("Autoavaliação PPGSC - Pesquisa docente")
 
 # Seleção de múltiplos anos
-anos_selecionados = st.multiselect("Selecione os Anos:", df['Ano'].unique(), default=df['Ano'].unique()[:1])
+anos_selecionados = st.multiselect("Selecione os Anos:", df['Ano'].unique(), default=df['Ano'].unique()[:2])
 
 # Função para gerar gráficos
 def gerar_grafico(selecao, titulo_grupo):
